@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
   <meta charset="UTF-8">
-  <title>Tab Visibility Tracker (Mobile-Friendly)</title>
+  <title>Хуудаснаас гарахыг шалгагч</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -38,16 +38,16 @@
   </style>
 </head>
 <body>
-  <h1>Tab Visibility Tracker</h1>
-  <p id="status">You are on this tab</p>
-  <button onclick="enableSound()">Enable Sound</button>
+  <h1>Хуудас идэвхтэй эсэхийг шалгах</h1>
+  <p id="status">Та энэ хуудас дээр байна</p>
+  <button onclick="enableSound()">Дуу асаах</button>
 
-  <!-- Sound element -->
+  <!-- Дууны элемент -->
   <audio id="alertSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" preload="auto"></audio>
 
-  <!-- Log area -->
+  <!-- Лог хэсэг -->
   <div id="log">
-    <strong>Event Log:</strong><br>
+    <strong>Үйлдлийн бүртгэл:</strong><br>
   </div>
 
   <script>
@@ -59,31 +59,31 @@
     function logEvent(message) {
       const timestamp = new Date().toLocaleString();
       const logMessage = `[${timestamp}] ${message}`;
-      console.log(logMessage); // Still available in desktop browser
+      console.log(logMessage);
       const entry = document.createElement('div');
       entry.textContent = logMessage;
       logDiv.appendChild(entry);
-      logDiv.scrollTop = logDiv.scrollHeight; // Auto-scroll
+      logDiv.scrollTop = logDiv.scrollHeight;
     }
 
     function enableSound() {
       soundEnabled = true;
-      sound.play().catch(() => {}); // Unlocks sound playback for Safari
-      alert('Sound enabled! Now switching tabs will play a sound.');
-      logEvent('Sound has been enabled by user.');
+      sound.play().catch(() => {});
+      alert('Дуу идэвхжлээ! Одоо таб солих үед дуу гарах болно.');
+      logEvent('Хэрэглэгч дууг идэвхжүүлсэн.');
     }
 
     function handleVisibilityChange() {
       if (document.hidden) {
-        statusElement.textContent = 'You left the tab';
+        statusElement.textContent = 'Та хуудаснаас гарсан байна';
         statusElement.style.color = 'red';
         if (soundEnabled) sound.play();
-        logEvent('User left the tab');
+        logEvent('Хэрэглэгч хуудаснаас гарсан.');
       } else {
-        statusElement.textContent = 'You are on this tab';
+        statusElement.textContent = 'Та энэ хуудас дээр байна';
         statusElement.style.color = 'green';
         if (soundEnabled) sound.play();
-        logEvent('User returned to the tab');
+        logEvent('Хэрэглэгч буцаж орж ирсэн.');
       }
     }
 
