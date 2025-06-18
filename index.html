@@ -2,49 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Tab Visibility with Sound (Mobile Safe)</title>
+  <title>Tab Visibility Tracker (Mobile-Friendly)</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      padding-top: 100px;
+      padding: 40px;
     }
     #status {
       font-size: 24px;
       color: green;
+      margin-bottom: 20px;
     }
     button {
       padding: 10px 20px;
       font-size: 16px;
-      margin-top: 30px;
+      margin-top: 10px;
       cursor: pointer;
+    }
+    #log {
+      margin-top: 40px;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      font-family: monospace;
+      font-size: 14px;
+      max-height: 300px;
+      overflow-y: auto;
     }
   </style>
 </head>
 <body>
-  <h1>Tab Visibility Checker (iPhone Compatible)</h1>
+  <h1>Tab Visibility Tracker</h1>
   <p id="status">You are on this tab</p>
-
-  <!-- Button to enable sound -->
   <button onclick="enableSound()">Enable Sound</button>
 
   <!-- Sound element -->
   <audio id="alertSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" preload="auto"></audio>
 
+  <!-- Log area -->
+  <div id="log">
+    <strong>Event Log:</strong><br>
+  </div>
+
   <script>
     const statusElement = document.getElementById('status');
     const sound = document.getElementById('alertSound');
+    const logDiv = document.getElementById('log');
     let soundEnabled = false;
 
     function logEvent(message) {
       const timestamp = new Date().toLocaleString();
-      console.log(`[${timestamp}] ${message}`);
+      const logMessage = `[${timestamp}] ${message}`;
+      console.log(logMessage); // Still available in desktop browser
+      const entry = document.createElement('div');
+      entry.textContent = logMessage;
+      logDiv.appendChild(entry);
+      logDiv.scrollTop = logDiv.scrollHeight; // Auto-scroll
     }
 
     function enableSound() {
       soundEnabled = true;
-      sound.play().catch(() => {}); // Try to play to unlock it on iOS
-      alert('Sound enabled! Now the tab switch will play a sound.');
+      sound.play().catch(() => {}); // Unlocks sound playback for Safari
+      alert('Sound enabled! Now switching tabs will play a sound.');
+      logEvent('Sound has been enabled by user.');
     }
 
     function handleVisibilityChange() {
