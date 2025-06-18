@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tab Visibility with Sound (Mobile Safe)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    #status {
+      font-size: 24px;
+      color: green;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tab Visibility Checker (iPhone Compatible)</h1>
+  <p id="status">You are on this tab</p>
+
+  <!-- Button to enable sound -->
+  <button onclick="enableSound()">Enable Sound</button>
+
+  <!-- Sound element -->
+  <audio id="alertSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" preload="auto"></audio>
+
+  <script>
+    const statusElement = document.getElementById('status');
+    const sound = document.getElementById('alertSound');
+    let soundEnabled = false;
+
+    function logEvent(message) {
+      const timestamp = new Date().toLocaleString();
+      console.log(`[${timestamp}] ${message}`);
+    }
+
+    function enableSound() {
+      soundEnabled = true;
+      sound.play().catch(() => {}); // Try to play to unlock it on iOS
+      alert('Sound enabled! Now the tab switch will play a sound.');
+    }
+
+    function handleVisibilityChange() {
+      if (document.hidden) {
+        statusElement.textContent = 'You left the tab';
+        statusElement.style.color = 'red';
+        if (soundEnabled) sound.play();
+        logEvent('User left the tab');
+      } else {
+        statusElement.textContent = 'You are on this tab';
+        statusElement.style.color = 'green';
+        if (soundEnabled) sound.play();
+        logEvent('User returned to the tab');
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+  </script>
+</body>
+</html>
