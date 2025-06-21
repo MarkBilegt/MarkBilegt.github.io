@@ -54,6 +54,12 @@
     const statusElement = document.getElementById('status');
     const sound = document.getElementById('alertSound');
     const logDiv = document.getElementById('log');
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      alert('Энэ хуудас нь гар утасны төхөөрөмжид зориулагдсан.');
+    } else {
+      alert('Энэ хуудас нь компьютерийн төхөөрөмжид зориулагдсан.');
+    }
     let soundEnabled = false;
 
     function logEvent(message) {
