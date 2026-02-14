@@ -1,94 +1,17 @@
-<!DOCTYPE html>
-<html lang="mn">
+<!doctype html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Хуудаснаас гарахыг шалгагч</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 40px;
-    }
-    #status {
-      font-size: 24px;
-      color: green;
-      margin-bottom: 20px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-    #log {
-      margin-top: 40px;
-      text-align: left;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      background: #f9f9f9;
-      border: 1px solid #ccc;
-      padding: 20px;
-      border-radius: 10px;
-      font-family: monospace;
-      font-size: 14px;
-      max-height: 300px;
-      overflow-y: auto;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Will You Be My Valentine?</title>
+  <script type="module" crossorigin src="/assets/index-DxwbvMQe.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-C1cTJfnq.css">
 </head>
+
 <body>
-  <h1>Хуудас идэвхтэй эсэхийг шалгах</h1>
-  <p id="status">Та энэ хуудас дээр байна</p>
-  <button onclick="enableSound()">Дуу асаах</button>
-
-  <!-- Дууны элемент -->
-  <audio id="alertSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" preload="auto"></audio>
-
-  <!-- Лог хэсэг -->
-  <div id="log">
-    <strong>Үйлдлийн бүртгэл:</strong><br>
-  </div>
-
-  <script>
-    const statusElement = document.getElementById('status');
-    const sound = document.getElementById('alertSound');
-    const logDiv = document.getElementById('log');
-
-    let soundEnabled = false;
-
-    function logEvent(message) {
-      const timestamp = new Date().toLocaleString();
-      const logMessage = `[${timestamp}] ${message}`;
-      console.log(logMessage);
-      const entry = document.createElement('div');
-      entry.textContent = logMessage;
-      logDiv.appendChild(entry);
-      logDiv.scrollTop = logDiv.scrollHeight;
-    }
-
-    function enableSound() {
-      soundEnabled = true;
-      sound.play().catch(() => {});
-      alert('Дуу идэвхжлээ! Одоо таб солих үед дуу гарах болно.');
-      logEvent('Хэрэглэгч дууг идэвхжүүлсэн.');
-    }
-
-    function handleVisibilityChange() {
-      if (document.hidden) {
-        statusElement.textContent = 'Та хуудаснаас гарсан байна';
-        statusElement.style.color = 'red';
-        if (soundEnabled) sound.play();
-        logEvent('Хэрэглэгч хуудаснаас гарсан.');
-      } else {
-        statusElement.textContent = 'Та энэ хуудас дээр байна';
-        statusElement.style.color = 'green';
-        if (soundEnabled) sound.play();
-        logEvent('Хэрэглэгч буцаж орж ирсэн.');
-      }
-    }
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-  </script>
+    <div id="root"></div>
 </body>
+
 </html>
